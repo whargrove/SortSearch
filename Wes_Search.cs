@@ -39,7 +39,6 @@ namespace SortSearch
 
 				if (i != l) // Don't swap if they are equal
 					Swap(i, l);
-				Console.WriteLine(Peek());
 			}
 			return _words;
 		}
