@@ -45,6 +45,29 @@ namespace SortSearch
 
 		public bool WordExistsInSet(string word)
 		{
+			var min = 0;
+			var max = _words.Count - 1;
+			var target = word[0]; // find me
+
+			while (max >= min)
+			{
+				var g = (min + max) / 2;
+				var guess = _words[g][0];
+
+				if (guess == target)
+				{
+					return true;
+				}
+				else if (guess < target)
+				{
+					min = g + 1;
+				}
+				else if (guess > target)
+				{
+					max = g - 1;
+				}
+			}
+
 			return false;
 		}
 
