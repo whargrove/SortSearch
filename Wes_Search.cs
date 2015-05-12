@@ -22,17 +22,24 @@ namespace SortSearch
 
 		public IEnumerable<string> GetOrderedWordSet()
 		{
-			var j = 0;
-			for (int i = 1; i < _words.Count; i++)
+			for (var i = 0; i < _words.Count; i++)
 			{
-				// Get the current word and the previous word
-				var thisWord = _words[i];
-				var previousWord = _words[i -1];
-				// Get the character values to compare
-				var thisWordCharVal = char.GetNumericValue(thisWord[0]);
-				var previousWordCharVal = char.GetNumericValue(previousWord[0]);
-				if (thisWordCharVal < previousWordCharVal)
-					Swap(i, i - 1);
+				var first = _words[i][0];
+				var l = i;
+
+				for (var j = i + 1; j < _words.Count; j++)
+				{
+					var second = _words[j][0];
+					if (first > second)
+					{
+						l = j;
+						first = second;
+					}
+				}
+
+				if (i != l) // Don't swap if they are equal
+					Swap(i, l);
+				Console.WriteLine(Peek());
 			}
 			return _words;
 		}
@@ -56,8 +63,9 @@ namespace SortSearch
 
 		private void Swap(int i, int j)
 		{
-			_words.Insert(j, _words[i]);
-			_words.Insert(i, _words[j]);
+			var _ = _words[i];
+			_words[i] = _words[j];
+			_words[j] = _;
 		}
 
 #endregion
